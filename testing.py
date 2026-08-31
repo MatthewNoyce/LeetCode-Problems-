@@ -1,12 +1,13 @@
 import ValidParenthesis as vp
 import PlusOne as po
+import singleNumber as sn
 import ctypes 
 
 #Creates a little dialogue box (for fun)
 def Mbox(title, text, style):
     return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-#Runs test cases 
+#Runs test cases    
 def testCases(test, testList, solns):
     for i in testList:
         idx = testList.index(i)
@@ -28,7 +29,13 @@ testPO = po.Solution.plusOne
 testListPO = [[1,2,3], [4,3,2,1], [9], [9,9,9]]
 solnsPO = [[1,2,4], [4,3,2,2], [1,0], [1,0,0,0]]
 
+###Test Cases for Single Num
+testSN = sn.Solution.singleNumber
+testListSN = [[2,2,1],[4,1,2,1,2],[1]]
+solnsSN = [1,4,1]
+
 
 ###Run Test Cases Here 
 testCases(testVP, testListVP, solnsVP)
 testCases(testPO, testListPO, solnsPO)
+testCases(testSN, testListSN, solnsSN)
