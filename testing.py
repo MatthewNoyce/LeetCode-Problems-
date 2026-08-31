@@ -6,40 +6,29 @@ import ctypes
 def Mbox(title, text, style):
     return ctypes.windll.user32.MessageBoxW(0, text, title, style)
 
-def testCasesVP():
-    output = True
-    test = vp.Solution
-    testList = ["()","()[]{}","(]", "([])", "([)]"]
-    solns = [True, True, False, True, False]
+#Runs test cases 
+def testCases(test, testList, solns):
     for i in testList:
         idx = testList.index(i)
-        if solns[idx] == test.isValid(i):
-            output= True
+        if solns[idx] == test(i):
+            pass
         else:
-            #Kicks you out of the function as soon as a test fails
-            return False
-    return output
+            return Mbox('Failed', 'One or More Tests Failed', 0)
+        
+    return Mbox('Passed', 'All Tests Passed', 0)
 
-def testCasesPO():
-    output = True
-    testList = [[1,2,3], [4,3,2,1], [9], [9,9,9]]
-    solns = [[1,2,4], [4,3,2,2], [1,0], [1,0,0,0]]
-    test = po.Solution
-    for i in testList:
-        idx = testList.index(i)
-        if solns[idx] == test.plusOne(i):
-            output = True
-        else:
-            return False
-    return output
 
-if testCasesVP():
-    Mbox('Passed', 'All Tests Passed For Valid Parenthesis', 0)
-else:
-    Mbox('Failed', 'One or More Tests Failed', 0)
+### Test Cases for Valid Parenthesis
+testVP = vp.Solution.isValid
+testListVP = ["()","()[]{}","(]", "([])", "([)]"] 
+solnsVP = [True, True, False, True, False]
 
-if testCasesVP():
-    Mbox('Passed', 'All Tests Passed For Plus One', 0)
-else:
-    Mbox('Failed', 'One or More Tests Failed', 0)
+### Test Cases for Plus One
+testPO = po.Solution.plusOne
+testListPO = [[1,2,3], [4,3,2,1], [9], [9,9,9]]
+solnsPO = [[1,2,4], [4,3,2,2], [1,0], [1,0,0,0]]
 
+
+###Run Test Cases Here 
+testCases(testVP, testListVP, solnsVP)
+testCases(testPO, testListPO, solnsPO)
